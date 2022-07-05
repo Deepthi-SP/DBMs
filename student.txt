@@ -1,0 +1,142 @@
+ create table student(usn char(10) primary key,
+    -> name varchar(20) not null,
+    -> address varchar(50) not null,
+    -> branch_id char(10) unique not null,
+    -> sem char(3) not null);
+    
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| NAME      | varchar(20) | NO   |     | NULL    |       |
+| ADDRESS   | varchar(50) | NO   |     | NULL    |       |
+| USN       | char(10)    | NO   | PRI | NULL    |       |
+| BRANCH_ID | int         | NO   | UNI | NULL    |       |
+| SEM       | int         | NO   |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+
+
+
+MODIFY DATATYPE
+alter table student modify SEM int(2) ;
+
+DROP COLUMN
+ALTER TABLE student DROP COLUMN USN ;
+
+ADD COLUMN 
+ALTER TABLE student ADD BRANCH_ID INT(2) UNIQUE,NOT NULL ;
+
+
+
+Table 'VP21MC010_college.student' doesn't exist
+mysql> create table student(usn char(10) primary key,
+    -> name varchar(20) not null );
+
+
+mysql> desc student;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| usn   | char(10)    | NO   | PRI | NULL    |       |
+| name  | varchar(20) | NO   |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+
+CONNECT TABLE(adding foreign key)
+alter table branch add foreign key(usn) references student(usn);
+
+COLUMN DROP
+alter table branch drop column branch ;
+
+
+
+
+
+
+
+
+create table branch(branch_id int(10) primary key, 
+    -> branch_name varchar(20) not null,
+    -> hod varchar(20) not null);
+
+desc branch;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| branch_id   | int         | NO   | PRI | NULL    |       |
+| branch_name | varchar(20) | NO   |     | NULL    |       |
+| hod         | varchar(20) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+
+
+create table student(usn int(10) unique not null, 
+name varchar(20) not null, 
+address varchar(50) not null,
+ branch_id int(10) primary key,
+  sem int(3) not null);
+Query OK, 0 rows affected, 3 warnings (0.02 sec)
+
+mysql> desc student ;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| usn       | int         | NO   | UNI | NULL    |       |
+| name      | varchar(20) | NO   |     | NULL    |       |
+| address   | varchar(50) | NO   |     | NULL    |       |
+| branch_id | int         | NO   | PRI | NULL    |       |
+| sem       | int         | NO   |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+
+ create table book(book_id int(10) unique not null,
+  booK_name varchar(20) not null,
+   author_id varchar(20) not null, 
+   publisher varchar(20) not null,
+    branch_id int(10) primary key);
+Query OK, 0 rows affected, 2 warnings (0.02 sec)
+
+mysql> desc book;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| book_id   | int         | NO   | UNI | NULL    |       |
+| booK_name | varchar(20) | NO   |     | NULL    |       |
+| author_id | varchar(20) | NO   |     | NULL    |       |
+| publisher | varchar(20) | NO   |     | NULL    |       |
+| branch_id | int         | NO   | PRI | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+
+create table author(author_id int(10) unique primary key,
+author_name varchar(20) not null, 
+country varchar(20) not null,
+age int(10) not null);
+Query OK, 0 rows affected, 2 warnings (0.02 sec)
+
+mysql> desc author ;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| author_id   | int         | NO   | PRI | NULL    |       |
+| author_name | varchar(20) | NO   |     | NULL    |       |
+| country     | varchar(20) | NO   |     | NULL    |       |
+| age         | int         | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+
+create table borrow(usn int(10) unique not null,
+book_id int(10) primary key,
+borrow_date date not null);
+Query OK, 0 rows affected, 2 warnings (0.02 sec)
+
+mysql> desc borrow ;
++-------------+------+------+-----+---------+-------+
+| Field       | Type | Null | Key | Default | Extra |
++-------------+------+------+-----+---------+-------+
+| usn         | int  | NO   | UNI | NULL    |       |
+| book_id     | int  | NO   | PRI | NULL    |       |
+| borrow_date | date | NO   |     | NULL    |       |
++-------------+------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
