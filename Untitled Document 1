@@ -1,0 +1,31 @@
+create table branch(Branch_id char(10) primary key, 
+     Branch_name varchar(20),
+     Hod varchar(20) );
+     
+     
+create table student(Usn char(10) primary key,
+     Name varchar(20) ,
+     Address varchar(50),
+     Branch_id char(10),
+     Sem int(3) 
+ foreign key (Branch_id) references branch (Branch_id));
+ 
+create table author(Author_id int(10) primary key,
+    Author_name varchar(20), 
+    Country varchar(20),
+    Age int(10));  
+    
+create table book(Book_id char(10) primary key,
+   BooK_name varchar(20),
+   Author_id int(10), 
+   Publisher varchar(20),
+   Branch_id char(10)
+   foreign key (Branch_id) references branch (Branch_id)
+   foreign key (Author_id) references author(Author_id));  
+   
+create table borrow(Usn char(10) 
+     Book_id char(10),
+     Borrow_date date,
+     primary key(Usn,Book_id)
+       
+     
