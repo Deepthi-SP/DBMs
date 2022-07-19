@@ -1,0 +1,399 @@
+create table branch(Branch_id char(10) primary key, 
+     Branch_name varchar(20),
+     Hod varchar(20) );
+     
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| Branch_id   | char(10)    | NO   | PRI | NULL    |       |
+| Branch_name | varchar(20) | YES  |     | NULL    |       |
+| Hod         | varchar(20) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+
+     
+     
+create table student(Usn char(10) primary key,
+     Name varchar(20) ,
+     Address varchar(50),
+     Branch_id char(10),
+     Sem int(3), 
+ foreign key (Branch_id) references branch (Branch_id));
+ 
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| Usn       | char(10)    | NO   | PRI | NULL    |       |
+| Name      | varchar(20) | YES  |     | NULL    |       |
+| Address   | varchar(50) | YES  |     | NULL    |       |
+| Branch_id | char(10)    | YES  | MUL | NULL    |       |
+| Sem       | int         | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+
+ 
+create table author(Author_id int(10) primary key,
+    Author_name varchar(20), 
+    Country varchar(20),
+    Age int(10));  
+    
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| Author_id   | int         | NO   | PRI | NULL    |       |
+| Author_name | varchar(20) | YES  |     | NULL    |       |
+| Country     | varchar(20) | YES  |     | NULL    |       |
+| Age         | int         | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+    
+    
+create table book(Book_id char(10) primary key,
+   BooK_name varchar(20),
+   Author_id int(10), 
+   Publisher varchar(20),
+   Branch_id char(10),
+   foreign key (Branch_id) references branch (Branch_id),
+   foreign key (Author_id) references author(Author_id)); 
+   
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| Book_id   | char(10)    | NO   | PRI | NULL    |       |
+| BooK_name | varchar(20) | YES  |     | NULL    |       |
+| Author_id | int         | YES  | MUL | NULL    |       |
+| Publisher | varchar(20) | YES  |     | NULL    |       |
+| Branch_id | char(10)    | YES  | MUL | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+ 
+   
+create table borrow(Usn char(10), 
+     Book_id char(10),
+     Borrow_date date,
+     primary key(Usn,Book_id),
+     foreign key (Usn) references student(Usn),
+     foreign key (Book_id) references book (Book_id));
+     
+ +-------------+----------+------+-----+---------+-------+
+| Field       | Type     | Null | Key | Default | Extra |
++-------------+----------+------+-----+---------+-------+
+| Usn         | char(10) | NO   | PRI | NULL    |       |
+| Book_id     | char(10) | NO   | PRI | NULL    |       |
+| Borrow_date | date     | YES  |     | NULL    |       |
++-------------+----------+------+-----+---------+-------+
+
+mysql> show tables;
++-----------------------------+
+| Tables_in_VP21MC010_college |
++-----------------------------+
+| author                      |
+| book                        |
+| borrow                      |
+| branch                      |
+| student                     |
++-----------------------------+
+
+
+insert into branch values("B01","MCA","Vandana");
+insert into branch values("B02","MBA","Shreyas");
+insert into branch values("B03","CIVIL","Nethra");
+insert into branch values("B04","CS","Kavya");
+insert into branch values("B05","MECH","Prasnna");
+
+mysql> select * from branch;
++-----------+-------------+---------+
+| Branch_id | Branch_name | Hod     |
++-----------+-------------+---------+
+| B01       | MCA         | Vandana |
+| B02       | MBA         | Shreyas |
+| B03       | CIVIL       | Nethra  |
+| B04       | CS          | Kavya   |
+| B05       | MECH        | Prasnna |
++-----------+-------------+---------+
+
+insert into student values("4VP21MC010","Deepthi","Hassan","B01","2");
+insert into student values("4VP21BA005","Disha","Madikeri","B02","2");
+insert into student values("4VP21MB016","Dhanya","Puttur","B03","8");
+insert into student values("4VP21CS001","Anaga","Honavar","B04","6");
+insert into student values("4VP21ME045","Sanju","Mysore","B05","4");
+insert into student values("4VP21MC035","Shrunga","Shirshi","B01","1");
+insert into student values("4VP21BA029","Pallavi","K.nagara","B02","1");
+
+mysql> select * from student;
++------------+---------+----------+-----------+------+
+| Usn        | Name    | Address  | Branch_id | Sem  |
++------------+---------+----------+-----------+------+
+| 4VP21BA005 | Disha   | Madikeri | B02       |    2 |
+| 4VP21BA029 | Pallavi | K.nagara | B02       |    1 |
+| 4VP21CS001 | Anaga   | Honavar  | B04       |    6 |
+| 4VP21MB016 | Dhanya  | Puttur   | B03       |    8 |
+| 4VP21MC010 | Deepthi | Hassan   | B01       |    2 |
+| 4VP21MC018 | Jhanu   | Thumkur  | B01       |    2 |
+| 4VP21MC035 | Shrunga | Shirshi  | B01       |    1 |
+| 4VP21ME045 | Sanju   | Mysore   | B05       |    4 |
++------------+---------+----------+-----------+------+
+
+
+insert into author values("1","Ramez Elmari","Arlinhton","51");
+insert into author values("2","James Gosling","US","45");
+insert into author values("3","Ellis Horowitz","Japan","52");
+insert into author values("4","Deepak kahamani","India","34");
+insert into author values("5","Baidyanath Mishra","India","42");
+
+mysql> select * from author;
++-----------+-------------------+-----------+------+
+| Author_id | Author_name       | Country   | Age  |
++-----------+-------------------+-----------+------+
+|         1 | Ramez Elmari      | Arlinhton |   51 |
+|         2 | James Gosling     | US        |   45 |
+|         3 | Ellis Horowitz    | Japan     |   52 |
+|         4 | Deepak kahamani   | India     |   34 |
+|         5 | Baidyanath Mishra | India     |   42 |
++-----------+-------------------+-----------+------+
+
+
+insert into book values("BK1","DMBS","1","Pearson","B01");
+insert into book values("BK2","Research Methodology","2","Pearson","B02");
+insert into book values("BK3","Data Structure","3","MC Graw Hill","B03");
+insert into book values("BK4","Thermo Dynamis","4","MC Graw Hill","B04");
+insert into book values("BK5","Heat Transfer","5","MC Graw Hill","B05");
+insert into book values("BK6","Algorithm","1","Taylor","B01");
+
+
+mysql> select * from book;
++---------+----------------------+-----------+--------------+-----------+
+| Book_id | BooK_name            | Author_id | Publisher    | Branch_id |
++---------+----------------------+-----------+--------------+-----------+
+| BK1     | DMBS                 |         1 | Pearson      | B01       |
+| BK2     | Research Methodology |         2 | Pearson      | B02       |
+| BK3     | Data Structure       |         3 | MC Graw Hill | B03       |
+| BK4     | Thermo Dynamis       |         4 | MC Graw Hill | B04       |
+| BK5     | Heat Transfer        |         5 | MC Graw Hill | B05       |
+| BK6     | Algorithm            |         1 | Taylor       | B01       |
++---------+----------------------+-----------+--------------+-----------+
+
+
+
+insert into borrow values("4VP21MC010","BK1","2010-05-21");
+insert into borrow values("4VP21BA005","BK2","2018-11-11");
+insert into borrow values("4VP21MB016","BK3","2009-02-10");
+insert into borrow values("4VP21CS001","BK4","2019-12-13");
+insert into borrow values("4VP21ME045","BK5","2004-01-01");
+insert into borrow values("4VP21MC010","BK2","2011-08-20");
+
+
+mysql> select * from borrow;
++------------+---------+-------------+
+| Usn        | Book_id | Borrow_date |
++------------+---------+-------------+
+| 4VP21BA005 | BK2     | 2018-11-11  |
+| 4VP21CS001 | BK4     | 2019-12-13  |
+| 4VP21MB016 | BK3     | 2009-02-10  |
+| 4VP21MC010 | BK1     | 2010-05-21  |
+| 4VP21MC010 | BK2     | 2011-08-20  |
+| 4VP21ME045 | BK5     | 2004-01-01  |
++------------+---------+-------------+
+
+
+select usn,name 
+from student,branch
+where student.Branch_id=branch.Branch_id 
+and Branch_name="MCA";
+
+OR
+
+select usn,name 
+from student s,branch b
+where s.Branch_id=b.Branch_id 
+and Branch_name="MCA";
+
++------------+---------+
+| usn        | name    |
++------------+---------+
+| 4VP21MC010 | Deepthi |
+| 4VP21MC018 | Jhanu   |
++------------+---------+
+
+select * from author where Country like "%nd%";
+OR
+select * from author where Country like "_nd__";
+
++-----------+-------------------+---------+------+
+| Author_id | Author_name       | Country | Age  |
++-----------+-------------------+---------+------+
+|         4 | Deepak kahamani   | India   |   34 |
+|         5 | Baidyanath Mishra | India   |   42 |
++-----------+-------------------+---------+------+
+
+select * from author where Age between 40 and 50;
+
++-----------+-------------------+---------+------+
+| Author_id | Author_name       | Country | Age  |
++-----------+-------------------+---------+------+
+|         2 | James Gosling     | US      |   45 |
+|         5 | Baidyanath Mishra | India   |   42 |
++-----------+-------------------+---------+------+
+
+select All Branch_id from student;
++-----------+
+| Branch_id |
++-----------+
+| B01       |
+| B01       |
+| B02       |
+| B03       |
+| B04       |
+| B05       |
++-----------+
+
+mysql> select Distinct Branch_id from student;
++-----------+
+| Branch_id |
++-----------+
+| B01       |
+| B02       |
+| B03       |
+| B04       |
+| B05       |
++-----------+
+
+select Usn,Name from student s,branch b
+where s.Branch_id=b.Branch_id and
+Branch_name="MCA" and Sem=2;
+
++------------+---------+
+| Usn        | Name    |
++------------+---------+
+| 4VP21MC010 | Deepthi |
+| 4VP21MC018 | Jhanu   |
++------------+---------+
+
+
+select usn,name 
+from student s,branch b
+where s.Branch_id=b.Branch_id 
+and Branch_name="MCA"
+order by Name;
+
++------------+---------+
+| usn        | name    |
++------------+---------+
+| 4VP21MC010 | Deepthi |
+| 4VP21MC018 | Jhanu   |
+| 4VP21MC035 | Shrunga |
++------------+---------+
+
+select Usn from student Union
+select usn from borrow;
+
++------------+
+| Usn        |
++------------+
+| 4VP21MC010 |
+| 4VP21MC018 |
+| 4VP21MC035 |
+| 4VP21BA005 |
+| 4VP21BA029 |
+| 4VP21MB016 |
+| 4VP21CS001 |
+| 4VP21ME045 |
++------------+
+
+select Distinct Name from student s,borrow b
+where s.Usn=b.Usn;
+OR
+select Distinct Name from student s,borrow b
+where s.Usn in(select Usn from borrow);
+
++---------+
+| Name    |
++---------+
+| Deepthi |
+| Disha   |
+| Dhanya  |
+| Anaga   |
+| Sanju   |
++---------+
+
+select Distinct Name from student s,borrow b
+where s.Usn not in(select Usn from borrow);
+
++---------+
+| Name    |
++---------+
+| Pallavi |
+| Jhanu   |
+| Shrunga |
++---------+
+
+select count(Author_name) from author;
+OR
+ select count(*) from author;
++--------------------+
+| count(Author_name) |
++--------------------+
+|                  5 |
++--------------------+
+
+ select count(Book_name) from book;
+ OR
+ select count(*) from book;
++------------------+
+| count(Book_name) |
++------------------+
+|                6 |
++------------------+
+
+select book.Author_id,Author_name,count(*) as total
+from  book,author
+where book.Author_id=author.Author_id
+group by book.Author_id;
+
++-----------+-------------------+-------+
+| Author_id | Author_name       | total |
++-----------+-------------------+-------+
+|         1 | Ramez Elmari      |     2 |
+|         2 | James Gosling     |     1 |
+|         3 | Ellis Horowitz    |     1 |
+|         4 | Deepak kahamani   |     1 |
+|         5 | Baidyanath Mishra |     1 |
++-----------+-------------------+-------+
+
+select student.Usn,student.Name,Branch_name,Author_name,borrow_date,BooK_name
+from student,branch,author,borrow,book
+where student.Usn=borrow.Usn and
+student.Branch_id=branch.Branch_id and
+borrow.Book_id=book.Book_id and
+book.Author_id=author.Author_id and
+student.Sem=2 and
+branch.Branch_name="MCA";
+
++------------+---------+-------------+---------------+-------------+----------------------+
+| Usn        | Name    | Branch_name | Author_name   | borrow_date | BooK_name            |
++------------+---------+-------------+---------------+-------------+----------------------+
+| 4VP21MC010 | Deepthi | MCA         | Ramez Elmari  | 2010-05-21  | DMBS                 |
+| 4VP21MC010 | Deepthi | MCA         | James Gosling | 2011-08-20  | Research Methodology |
++------------+---------+-------------+---------------+-------------+----------------------+
+
+select *
+from student
+where usn in(select Usn from borrow 
+group by Usn having count(Usn)>=2);
++------------+---------+---------+-----------+------+
+| Usn        | Name    | Address | Branch_id | Sem  |
++------------+---------+---------+-----------+------+
+| 4VP21MC010 | Deepthi | Hassan  | B01       |    2 |
++------------+---------+---------+-----------+------+
+
+select BooK_name 
+from book
+order by BooK_name desc; 
++----------------------+
+| BooK_name            |
++----------------------+
+| Thermo Dynamis       |
+| Research Methodology |
+| Heat Transfer        |
+| DMBS                 |
+| Data Structure       |
+| Algorithm            |
++----------------------+
+
+
