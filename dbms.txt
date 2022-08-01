@@ -1,2 +1,5 @@
 mysql -h 192.168.14.71 -u VP21MC010 -p
 Vcet@2022
+
+
+https://www.vvitengineering.com/lab/CS6611-MOBILE-APPLICATION-DEVELOPMENT-LABORATORY.pdf
