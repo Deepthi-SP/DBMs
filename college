@@ -432,3 +432,4 @@ group by Usn
 having count(distinct Publisher)=1);
 
 
+https://developer.android.com/training/camera/photobasics#java
