@@ -396,3 +396,39 @@ order by BooK_name desc;
 | Algorithm            |
 +----------------------+
 
+select * from student s where
+exists
+(select br.Usn 
+from borrow br,book bk
+where br.Book_id=bk.Book_id and br.Usn=s.Usn
+group by Usn
+having count(distinct Author_id)>1);
+
+
++------------+---------+---------+-----------+------+
+| Usn        | Name    | Address | Branch_id | Sem  |
++------------+---------+---------+-----------+------+
+| 4VP21MC010 | Deepthi | Hassan  | B01       |    2 |
++------------+---------+---------+-----------+------+
+
+
+select Usn 
+from borrow br,book bk
+where br.Book_id=bk.Book_id
+group by Usn having count(Author_id)>1;
+
++------------+
+| Usn        |
++------------+
+| 4VP21MC010 |
++------------+
+
+select * from student s where
+exists
+(select Usn,Publisher
+from borrow,book
+where borrow.Book_id=book.Book_id and s.Usn=borrow.Usn
+group by Usn
+having count(distinct Publisher)=1);
+
+
