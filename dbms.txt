@@ -4,3 +4,4 @@ Vcet@2022
 
 https://www.vvitengineering.com/lab/CS6611-MOBILE-APPLICATION-DEVELOPMENT-LABORATORY.pdf
 https://www.codegrepper.com/code-examples/java/capture+image+from+camera+android+source+code
+https://www.geeksforgeeks.org/how-to-build-a-weather-app-in-android/
