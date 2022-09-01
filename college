@@ -11,8 +11,7 @@ create table branch(Branch_id char(10) primary key,
 +-------------+-------------+------+-----+---------+-------+
 
      
-     
-create table student(Usn char(10) primary key,
+     create table student(Usn char(10) primary key,
      Name varchar(20) ,
      Address varchar(50),
      Branch_id char(10),
