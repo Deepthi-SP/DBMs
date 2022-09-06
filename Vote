@@ -51,6 +51,7 @@ insert into const values('co02','mysore','karnataka','1000');
 insert into const values('co03','telangana','hyderbad','2000');
 insert into const values('co04','maharastra','mumbai','3000');
 
+
 +------+------------+-----------+-------+
 | coid | cname      | cstate    | votes |
 +------+------------+-----------+-------+
